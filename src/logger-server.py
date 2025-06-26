@@ -12,11 +12,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, int(PORT)))
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.listen(1)
+    print(f"Server listening on {HOST}:{PORT}")
 
     while True:
         try:
             conn, addr = s.accept()
             conn.settimeout(5)  # Set a timeout for the connection
+            print(f"Connection established with {addr}")
             try:
                 with conn.makefile('rb') as f:
                     command = f.readline()
