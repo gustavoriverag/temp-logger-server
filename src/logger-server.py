@@ -7,6 +7,7 @@ import time
 
 HOST = '0.0.0.0'
 PORT = "1234"
+db_path = '/var/local/temp-logger/temps.db'
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, int(PORT)))
@@ -29,7 +30,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         print(f"Received temperature: {temp}, humidity: {humidity}")
                         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                         try: 
-                            with sqlite3.connect('temps.db') as db:
+                            with sqlite3.connect(db_path) as db:
                                 cursor = db.cursor()
                                 cursor.execute("CREATE TABLE IF NOT EXISTS temps (id INTEGER PRIMARY KEY, timestamp DATETIME DEFAULT (datetime('now')), temperature REAL, humidity REAL)")
                                 cursor.execute("INSERT INTO temps (timestamp, temperature, humidity) VALUES (?, ?, ?)", (timestamp, temp, humidity))

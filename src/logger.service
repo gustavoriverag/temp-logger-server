@@ -2,7 +2,8 @@
 Description=Logger server
 
 [Service]
-ExecStart=/usr/sbin/logger-server.py
+Type=Simple
+ExecStart=/usr/bin/python3 /usr/local/bin/logger-server.py
 
 [Install]
 WantedBy=multi-user.target
