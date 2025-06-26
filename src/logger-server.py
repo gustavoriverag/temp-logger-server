@@ -31,7 +31,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                         try: 
                             with sqlite3.connect('temps.db') as db:
                                 cursor = db.cursor()
-                                cursor.execute("CREATE TABLE IF NOT EXISTS temps ('id INTEGER PRIMARY KEY, timestamp DATETIME DEFAULT (datetime('now'))), temperature REAL, humidity REAL')")
+                                cursor.execute("CREATE TABLE IF NOT EXISTS temps (id INTEGER PRIMARY KEY, timestamp DATETIME DEFAULT (datetime('now')), temperature REAL, humidity REAL)")
                                 cursor.execute("INSERT INTO temps (timestamp, temperature, humidity) VALUES (?, ?, ?)", (timestamp, temp, humidity))
                                 db.commit()
                                 print("Data inserted into database successfully")
