@@ -16,6 +16,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
     while True:
         try:
+            print("Waiting for a connection...")
             conn, addr = s.accept()
             conn.settimeout(5)  # Set a timeout for the connection
             print(f"Connection established with {addr}")
@@ -33,6 +34,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                                 cursor.execute("CREATE TABLE IF NOT EXISTS temps ('id INTEGER PRIMARY KEY, timestamp DATETIME DEFAULT (datetime('now'))), temperature REAL, humidity REAL')")
                                 cursor.execute("INSERT INTO temps (timestamp, temperature, humidity) VALUES (?, ?, ?)", (timestamp, temp, humidity))
                                 db.commit()
+                                print("Data inserted into database successfully")
                         except sqlite3.Error as e:
                             print("Database error:", e)
                             
