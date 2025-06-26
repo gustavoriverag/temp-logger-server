@@ -1,9 +1,11 @@
 [Unit]
 Description=Logger server
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=Simple
-ExecStart=/usr/bin/python3 /usr/local/bin/logger-server.py
+ExecStart=/usr/bin/python3 -u /usr/local/bin/logger-server.py
 
 [Install]
 WantedBy=multi-user.target
