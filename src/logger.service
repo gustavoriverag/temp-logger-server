@@ -1,0 +1,8 @@
+[Unit]
+Description=Logger server
+
+[Service]
+ExecStart=/usr/sbin/logger-server.py
+
+[Install]
+WantedBy=multi-user.target
